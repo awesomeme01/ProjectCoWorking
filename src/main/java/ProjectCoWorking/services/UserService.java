@@ -14,7 +14,6 @@ public class UserService {
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<User> getUsers_JSON() {
-        System.out.println("Getting users");
         List<User> users = UserDao.getAllUsers();
         return users;
     }
@@ -34,7 +33,6 @@ public class UserService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public User addUser(User user) {
-        System.out.println("in add");
         return UserDao.addUser(user);
     }
     //--------- update user ----------
