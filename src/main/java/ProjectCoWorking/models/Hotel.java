@@ -14,12 +14,12 @@ public class Hotel {
     private boolean airConditioning;
     private boolean spa;
     private boolean fitness;
-    private Restaurant restaurant;
+    private int restaurantId;
 
     public Hotel() {
     }
 
-    public Hotel(int id, String name, String address, double price, int rating, boolean freeWifi, boolean breakfast, boolean pool, boolean parking, boolean bar, boolean airConditioning, boolean spa, boolean fitness, Restaurant restaurant) {
+    public Hotel(int id, String name, String address, double price, int rating, boolean freeWifi, boolean breakfast, boolean pool, boolean parking, boolean bar, boolean airConditioning, boolean spa, boolean fitness, int restaurant) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -33,7 +33,7 @@ public class Hotel {
         this.airConditioning = airConditioning;
         this.spa = spa;
         this.fitness = fitness;
-        this.restaurant = restaurant;
+        this.restaurantId = restaurant;
     }
 
     public int getId() {
@@ -88,8 +88,8 @@ public class Hotel {
         return fitness;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
+    public int getRestaurant() {
+        return restaurantId;
     }
 
     @Override
@@ -108,7 +108,7 @@ public class Hotel {
                 ", airConditioning=" + airConditioning +
                 ", spa=" + spa +
                 ", fitness=" + fitness +
-                ", restaurant=" + restaurant +
+                ", restaurantId=" + restaurantId +
                 '}';
     }
 }

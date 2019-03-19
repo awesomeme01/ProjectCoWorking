@@ -15,60 +15,45 @@ public class HotelDao {
 //    private int id; name; address; price; rating; freeWifi; breakfast; pool; parking;
 // bar; airConditioning; spa; fitness; restaurant;
     static DatabaseConnector db = new DatabaseConnector();
-//    public static Hotel getHotel(int id){
-//        String SQL = "select id, name, address, price, rating, freeWifi, breakfast, pool, parking, bar, " +
-//                "airConditioning, spa, fitness, restaurant from hotel where id = " + id;
-//        try(
-//                Connection conn = db.connect();
-//                PreparedStatement stmt = conn.prepareStatement(SQL);
-//                ResultSet rs = stmt.executeQuery()
-//        ){
-//            Hotel hotel;
-//            if(rs.next()){
-//                hotel = new Hotel(rs.getInt("id"),
-//                        rs.getString("name"),
-//                        rs.getString("address"),
-//                        rs.getDouble("price"),
-//                        rs.getInt("rating"),
-//                        rs.getBoolean("freeWifi"),
-//                        rs.getBoolean("breakfast"),
-//                        rs.getBoolean("pool"),
-//                        rs.getBoolean("parking"),
-//                        rs.getBoolean("bar"),
-//                        rs.getBoolean("airConditioning"),
-//                        rs.getBoolean("spa"),
-//                        rs.getBoolean("fitness"),
-//                        ));
-//            }
-//            else{
-//                return null;
-//            }
-//            System.out.println("getting user by id = " + id);
-//            return hotel;
-//        }
-//        catch(SQLException ex){
-//            System.out.println("getting user UNSUCCESSFUL!");
-//            System.out.println(ex.getMessage());
-//            return null;
-//        }
-//    }
+    public static Hotel getHotel(int id){
+        String SQL = "select id, name, address, price, rating, freeWifi, breakfast, pool, parking, bar, " +
+                "airConditioning, spa, fitness, restaurant from hotel where id = " + id;
+        try(
+                Connection conn = db.connect();
+                PreparedStatement stmt = conn.prepareStatement(SQL);
+                ResultSet rs = stmt.executeQuery()
+        ){
+            Hotel hotel;
+            if(rs.next()){
+                hotel = new Hotel(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getDouble("price"),
+                        rs.getInt("rating"),
+                        rs.getBoolean("freeWifi"),
+                        rs.getBoolean("breakfast"),
+                        rs.getBoolean("pool"),
+                        rs.getBoolean("parking"),
+                        rs.getBoolean("bar"),
+                        rs.getBoolean("airConditioning"),
+                        rs.getBoolean("spa"),
+                        rs.getBoolean("fitness"),
+                        rs.getInt("restaurantId")
+                        );
+            }
+            else{
+                return null;
+            }
+            System.out.println("getting user by id = " + id);
+            return hotel;
+        }
+        catch(SQLException ex){
+            System.out.println("getting user UNSUCCESSFUL!");
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
 
-//    public static Restaurant getRestsaurant(int id){
-//            String SQL = "select id = ? from restaurant;";
-//
-//            Restaurant restaurant = new Restaurant();
-//        try(
-//                Connection conn = db.connect();
-//                PreparedStatement stmt = conn.prepareStatement(SQL)) {
-//           id = stmt.setInt(1, restaurant.getId());
-//            stmt.executeUpdate();
-//            return ;
-//        }
-//        catch (SQLException ex){
-//            System.out.println(ex.getMessage());
-//            return null;
-//        }
-//        }
 
     public static User addUser(User user){
         String SQL = "insert into users(name, password) values(?,?)";
