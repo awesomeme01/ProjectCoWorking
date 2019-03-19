@@ -1,11 +1,11 @@
 package ProjectCoWorking.models;
 
 public class Restaurant {
-    int id;
-    String name;
-   Menu menu;
-    String address;
-    int rating;
+   private int id;
+   private String name;
+   private Menu menu;
+   private String address;
+   private int rating;
 
     public Restaurant() {
     }

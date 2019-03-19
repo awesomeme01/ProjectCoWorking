@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntertainmentDao {
+//    private int id; name; price; address; ageRestrictions;
     static DatabaseConnector db = new DatabaseConnector();
     public static Entertainment getEntertainment(int id){
         String SQL = "select id, name, price, address, ageRestrictions from entertainment where id = " + id;
@@ -41,15 +42,15 @@ public class EntertainmentDao {
             return null;
         }
     }
-    public static Entertainment addentertainment(Entertainment entertainment){
-        String SQL = "   insert into entertainment(name, price, address, ageRestrictions) values(?,?,?,?)";
+    public static Entertainment addEntertainment(Entertainment entertainment){
+        String SQL = "insert into entertainment(name, price, address, ageRestrictions) values(?,?,?,?)";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL)) {
             stmt.setString(1, entertainment.getName());
             stmt.setDouble(2, entertainment.getPrice());
-            stmt.setString(1, entertainment.getAddress());
-            stmt.setInt(2, entertainment.getAgeRestriction());
+            stmt.setString(3, entertainment.getAddress());
+            stmt.setInt(4, entertainment.getAgeRestriction());
             stmt.executeUpdate();
             System.out.println("adding entertainment");
             return entertainment;
@@ -67,7 +68,7 @@ public class EntertainmentDao {
                 PreparedStatement stmt = conn.prepareStatement(SQL)
         ){
             stmt.setString(1, entertainment.getName());
-            stmt.setInt(3, entertainment.getId());
+            stmt.setInt(2, entertainment.getId());
             stmt.executeUpdate();
             System.out.println("updating entertainment");
             return entertainment;

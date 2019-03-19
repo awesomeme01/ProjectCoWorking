@@ -1,10 +1,10 @@
 package ProjectCoWorking.models;
 
 public class FlyTickets {
-    int id;
-    double price;
-    String categories;
-    String time;
+   private int id;
+   private double price;
+   private String categories;
+   private String time;
 
     public FlyTickets() {
     }

@@ -4,17 +4,17 @@ public class Hotel {
     private int id;
     private String name;
     private String address;
-    double price;
+    private double price;
     private int rating;
-    boolean freeWifi;
-    boolean breakfast;
-    boolean pool;
-    boolean parking;
-    boolean bar;
-    boolean airConditioning;
-    boolean spa;
-    boolean fitness;
-    Restaurant restaurant;
+    private boolean freeWifi;
+    private boolean breakfast;
+    private boolean pool;
+    private boolean parking;
+    private boolean bar;
+    private boolean airConditioning;
+    private boolean spa;
+    private boolean fitness;
+    private Restaurant restaurant;
 
     public Hotel() {
     }
