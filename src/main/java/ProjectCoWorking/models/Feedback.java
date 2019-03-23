@@ -1,10 +1,10 @@
 package ProjectCoWorking.models;
 
 public class Feedback {
-    int id;
-    String message;
-    String recallTime;
-    int userId;
+   private int id;
+   private String message;
+   private String recallTime;
+   private int userId;
 
     public Feedback() {
     }

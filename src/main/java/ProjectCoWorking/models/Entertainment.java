@@ -1,11 +1,17 @@
 package ProjectCoWorking.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="entertainment")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Entertainment {
-    int id;
-    String name;
-    double price;
-    String address;
-    int ageRestrictions;
+   private int id;
+   private String name;
+   private double price;
+   private String address;
+   private int ageRestrictions;
 
     public Entertainment() {
     }

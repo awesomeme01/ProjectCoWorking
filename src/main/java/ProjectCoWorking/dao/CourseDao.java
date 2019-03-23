@@ -12,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDao {
+    //id, name, rating, address, price, time
     static DatabaseConnector db = new DatabaseConnector();
     public static Course getCourse(int id){
-        String SQL = "";
+        String SQL = "select id, name, rating, address, price, cast(time as varchar(50)) from course where id = " + id;
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
@@ -43,15 +44,16 @@ public class CourseDao {
         }
     }
     public static Course addCourse(Course course){
-        String SQL = "   insert into course(name, rating, address, price, time) values(?,?,?,?,?)";
+        String SQL = "insert into course(id, name, rating, address, price, time) values(?,?,?,?,?,?)";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL)) {
-            stmt.setString(1, course.getName());
-            stmt.setInt(2, course.getRating());
-            stmt.setString(1, course.getAddress());
-            stmt.setDouble(2, course.getPrice());
-            stmt.setString(2, course.getTime());
+            stmt.setInt(1,course.getId());
+            stmt.setString(2, course.getName());
+            stmt.setInt(3, course.getRating());
+            stmt.setString(4, course.getAddress());
+            stmt.setDouble(5, course.getPrice());
+            stmt.setString(6, course.getTime());
             stmt.executeUpdate();
             System.out.println("adding course");
             return course;
@@ -63,13 +65,13 @@ public class CourseDao {
         }
     }
     public static Course updateCourse(Course course){
-        String SQL = "update users set name = ? where id = ?";
+        String SQL = "update course set name = ? where id = ?";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL)
         ){
             stmt.setString(1, course.getName());
-            stmt.setInt(3, course.getId());
+            stmt.setInt(2, course.getId());
             stmt.executeUpdate();
             System.out.println("updating course");
             return course;
@@ -98,7 +100,7 @@ public class CourseDao {
     }
     public static List<Course> getAllCourse(){
         List<Course> courseList = new ArrayList<>();
-        String SQL = "select name, rating, address, price, cast(time as varchar(50)) from course";
+        String SQL = "select id, name, rating, address, price, cast(time as varchar(50)) from course";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);

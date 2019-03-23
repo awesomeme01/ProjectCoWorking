@@ -1,12 +1,12 @@
 package ProjectCoWorking.models;
 
 public class Course {
-    int id;
-    String name;
-    int rating;
-    String address;
-    double price;
-    String time;
+   private int id;
+   private String name;
+   private int rating;
+   private String address;
+   private double price;
+   private String time;
 
     public Course() {
     }

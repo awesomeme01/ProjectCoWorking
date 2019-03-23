@@ -1,9 +1,9 @@
 package ProjectCoWorking.models;
 
 public class Menu {
-    int id;
-    String dishes;
-    double price;
+   private int id;
+   private String dishes;
+   private double price;
 
     public Menu() {
     }
