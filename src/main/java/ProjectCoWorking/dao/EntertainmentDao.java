@@ -14,7 +14,7 @@ import java.util.List;
 public class EntertainmentDao {
     static DatabaseConnector db = new DatabaseConnector();
     public static Entertainment getEntertainment(int id){
-        String SQL = "select id, name, price, address, ageRestrictions from entertainment where id = " + id;
+        String SQL = "select id, name, pri  ce, address, ageRestrictions from entertainment where id = " + id;
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
