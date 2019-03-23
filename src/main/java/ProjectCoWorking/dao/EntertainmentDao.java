@@ -1,81 +1,76 @@
 package ProjectCoWorking.dao;
 
 import ProjectCoWorking.database.DatabaseConnector;
-import ProjectCoWorking.models.Course;
 import ProjectCoWorking.models.Entertainment;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EntertainmentDao {
-//    private int id; name; price; address; ageRestrictions;
     static DatabaseConnector db = new DatabaseConnector();
+//    get, add, update, delete, getAll
     public static Entertainment getEntertainment(int id){
-        String SQL = "select id, name, price, address, ageRestrictions from entertainment where id = " + id;
+        String SQL = "select id, name, price, adress, agerestrictions from entertainment where id = ?";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
-                ResultSet rs = stmt.executeQuery()
+                ResultSet rs = stmt.executeQuery();
         ){
-            Entertainment entertainment;
-            if(rs.next()){
-                entertainment = new Entertainment(rs.getInt("id"),
+            while(rs.next()){
+                return new Entertainment(rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getDouble("price"),
-                        rs.getString("address"),
-                        rs.getInt("ageRestrictions"));
+                        rs.getInt("price"),
+                        rs.getString("adress"),
+                        rs.getInt("agerestrictions"));
             }
-
-            else{
-                return null;
-            }
-            System.out.println("getting entertainment by id = " + id);
-            return entertainment;
+            System.out.println("Getting entertainments");
         }
         catch(SQLException ex){
-            System.out.println("getting entertainment UNSUCCESSFUL!");
             System.out.println(ex.getMessage());
-            return null;
+            System.out.println("Getting entertainments UNSUCCESSFUL");
         }
+        return null;
     }
     public static Entertainment addEntertainment(Entertainment entertainment){
-        String SQL = "insert into entertainment(name, price, address, ageRestrictions) values(?,?,?,?)";
+        String SQL = "insert into entertainment values(?,?,?,?,?)";
         try(
                 Connection conn = db.connect();
-                PreparedStatement stmt = conn.prepareStatement(SQL)) {
-            stmt.setString(1, entertainment.getName());
-            stmt.setDouble(2, entertainment.getPrice());
-            stmt.setString(3, entertainment.getAddress());
-            stmt.setInt(4, entertainment.getAgeRestriction());
+                PreparedStatement stmt = conn.prepareStatement(SQL)
+                ){
+            stmt.setInt(1, entertainment.getId());
+            stmt.setString(2,entertainment.getName());
+            stmt.setDouble(3,entertainment.getPrice());
+            stmt.setString(4,entertainment.getAddress());
+            stmt.setInt(5,entertainment.getAgeRestriction());
             stmt.executeUpdate();
-            System.out.println("adding entertainment");
+            System.out.println("Adding entertainment");
             return entertainment;
         }
         catch (SQLException ex){
-            System.out.println("adding entertainment UNSUCCESSFUL");
             System.out.println(ex.getMessage());
+            System.out.println("Adding entertainment UNSUCCESSFUL");
             return null;
         }
     }
     public static Entertainment updateEntertainment(Entertainment entertainment){
-        String SQL = "update entertainment set name = ? where id = ?";
+        String SQL = "update entertainment set name = ?,price = ?,address = ?, agerestrictions = ? where id = ?";
         try(
                 Connection conn = db.connect();
-                PreparedStatement stmt = conn.prepareStatement(SQL)
-        ){
-            stmt.setString(1, entertainment.getName());
-            stmt.setInt(2, entertainment.getId());
+                PreparedStatement stmt = conn.prepareStatement(SQL);
+                ){
+            stmt.setInt(5,entertainment.getId());
+            stmt.setString(1,entertainment.getName());
+            stmt.setDouble(2,entertainment.getPrice());
+            stmt.setString(3,entertainment.getAddress());
+            stmt.setInt(4,entertainment.getAgeRestriction());
             stmt.executeUpdate();
-            System.out.println("updating entertainment");
+            System.out.println("Updating entertainments");
             return entertainment;
         }
-        catch(SQLException ex){
-            System.out.println("updating entertainment UNSUCCESSFUL");
+        catch (SQLException ex){
             System.out.println(ex.getMessage());
+            System.out.println("Updating entertainment UNSUCCESSFUL");
             return null;
         }
     }
@@ -83,39 +78,41 @@ public class EntertainmentDao {
         String SQL = "delete from entertainment where id = ?";
         try(
                 Connection conn = db.connect();
-                PreparedStatement stmt = conn.prepareStatement(SQL)
-        ){
+                PreparedStatement stmt = conn.prepareStatement(SQL);
+                ){
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            System.out.println("deleted entertainment by id = " + id);
+            System.out.println("Deleted entertainment");
         }
-        catch(SQLException ex) {
-            System.out.println("Couldn't delete entertainment by id = " + id);
+        catch(SQLException ex){
             System.out.println(ex.getMessage());
+            System.out.println("Deleting entertainment under id = " + id + " was UNSUCCESSFUL");
         }
-
     }
     public static List<Entertainment> getAllEntertainment(){
-        List<Entertainment> entertainmentList = new ArrayList<>();
-        String SQL = "select name, price, address, ageRestrictions from entertainment";
+        String SQL = "select id, name, price, address, agerestrictions from entertainment";
         try(
                 Connection conn = db.connect();
-                PreparedStatement stmt = conn.prepareStatement(SQL);
-                ResultSet rs = stmt.executeQuery()
-        ){
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(SQL);
+                ){
+            ArrayList<Entertainment> list = new ArrayList<>();
             while(rs.next()){
-                entertainmentList.add(new Entertainment(rs.getInt("id"),
+                list.add(new Entertainment(
+                        rs.getInt("id"),
                         rs.getString("name"),
                         rs.getDouble("price"),
                         rs.getString("address"),
-                        rs.getInt("ageRestrictions")));
+                        rs.getInt("agerestrictions")
+                ));
             }
-            System.out.println("getting all entertainment");
+            System.out.println("Getting all from entertainment");
+            return list;
         }
-        catch(SQLException ex){
-            System.out.println("getting all entertainment UNSUCCESSFUL");
+        catch(SQLException ex ){
             System.out.println(ex.getMessage());
+            System.out.println("Getting all from entertainment UNSUCCESSFUL");
+            return null;
         }
-        return entertainmentList;
     }
 }

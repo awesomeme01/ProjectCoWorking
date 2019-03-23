@@ -44,89 +44,28 @@ public class HotelDao {
             else{
                 return null;
             }
-            System.out.println("getting user by id = " + id);
+            System.out.println("getting hotel by id = " + id);
             return hotel;
         }
         catch(SQLException ex){
-            System.out.println("getting user UNSUCCESSFUL!");
+            System.out.println("getting hotel UNSUCCESSFUL!");
             System.out.println(ex.getMessage());
             return null;
         }
     }
 
 
-    public static User addUser(User user){
-        String SQL = "insert into users(name, password) values(?,?)";
-        try(
-                Connection conn = db.connect();
-                PreparedStatement stmt = conn.prepareStatement(SQL)) {
-            stmt.setString(1, user.getName());
-            stmt.setString(2, user.getPassword());
-            stmt.executeUpdate();
-            System.out.println("adding user");
-            return user;
-        }
-        catch (SQLException ex){
-            System.out.println("adding user UNSUCCESSFUL");
-            System.out.println(ex.getMessage());
-            return null;
-        }
+    public static Hotel addHotel(Hotel hotel){
+        return null;
     }
-    public static User updateUser(User user){
-        String SQL = "update users set name = ?, password = ? where id = ?";
-        try(
-                Connection conn = db.connect();
-                PreparedStatement stmt = conn.prepareStatement(SQL)
-        ){
-            stmt.setString(1, user.getName());
-            stmt.setString(2, user.getPassword());
-            stmt.setInt(3, user.getId());
-            stmt.executeUpdate();
-            System.out.println("updating user");
-            return user;
-        }
-        catch(SQLException ex){
-            System.out.println("updating user UNSUCCESSFUL");
-            System.out.println(ex.getMessage());
-            return null;
-        }
+    public static Hotel updateHotel(Hotel hotel){
+        return null;
     }
-    public static void deleteUser(int id){
-        String SQL = "delete from users where id = ?";
-        try(
-                Connection conn = db.connect();
-                PreparedStatement stmt = conn.prepareStatement(SQL)
-        ){
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-            System.out.println("deleted user by id = " + id);
-        }
-        catch(SQLException ex) {
-            System.out.println("Couldn't delete user by id = " + id);
-            System.out.println(ex.getMessage());
-        }
+    public static void deleteUserHotel(int id){
+
 
     }
     public static List<User> getAllUsers(){
-        List<User> userList = new ArrayList<>();
-        String SQL = "select id, name, password, cast(datecreated as varchar(50)) from users";
-        try(
-                Connection conn = db.connect();
-                PreparedStatement stmt = conn.prepareStatement(SQL);
-                ResultSet rs = stmt.executeQuery()
-        ){
-            while(rs.next()){
-                userList.add(new User(rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("password"),
-                        rs.getString("datecreated")));
-            }
-            System.out.println("getting all users");
-        }
-        catch(SQLException ex){
-            System.out.println("getting all users UNSUCCESSFUL");
-            System.out.println(ex.getMessage());
-        }
-        return userList;
+        return null;
     }
 }
