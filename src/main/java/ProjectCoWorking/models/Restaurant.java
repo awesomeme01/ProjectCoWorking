@@ -1,5 +1,11 @@
 package ProjectCoWorking.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="restaurant")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Restaurant {
    private int id;
    private String name;

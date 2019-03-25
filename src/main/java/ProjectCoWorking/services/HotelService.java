@@ -12,15 +12,14 @@ public class HotelService {
     @GET
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public List<Hotel> getAllHotels(){
-//        HotelDao.getAllHotels();
-        return null;
+        return HotelDao.getAllHotels();
+
     }
 
     @GET
     @Path("/{hotelId}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Hotel getHotel(@PathParam("hotelId") Integer hotelId){
-//        return null;
         return HotelDao.getHotel(hotelId);
     }
 
@@ -28,21 +27,19 @@ public class HotelService {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Hotel createHotel(Hotel hotel){
-//        return HotelDao.addHotel(hotel);
-        return null;
+        return HotelDao.addHotel(hotel);
     }
 
     @PUT
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Hotel updateHotel(Hotel hotel){
-//        return HotelDao.updateHotel(hotel);
-        return null;
+        return HotelDao.updateHotel(hotel);
     }
 
     @DELETE
     @Path("/{hotelId}")
     public void deleteHotel(@PathParam("hotelId") Integer hotelId){
-//        HotelDao.deleteHotel(hotelId);
+        HotelDao.deleteHotel(hotelId);
     }
 
 }
