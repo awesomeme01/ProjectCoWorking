@@ -97,7 +97,7 @@ public class RestaurantDao {
         }
 
     }
-    public static List<Restaurant> getAllRestaurant(Restaurant restaurant){
+    public static List<Restaurant> getAllRestaurant(){
         List<Restaurant> restaurantList = new ArrayList<>();
         String SQL = "select id, name, menu_id, address, rating from restaurant";
         try(
