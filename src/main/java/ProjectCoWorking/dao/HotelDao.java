@@ -12,72 +12,49 @@ import java.util.List;
 import java.util.Map;
 
 public class HotelDao {
-    //    id, name, address, price, rating, freeWifi, breakfast, pool, parking, bar, airConditioning, spa, fitness, restaurant
+//    id, name, address, price, rating, freeWifi, breakfast, pool, parking, bar, airConditioning, spa, fitness, restaurant
     static DatabaseConnector db = new DatabaseConnector();
     public static Hotel getHotel(int id){
-        String SQL = "select id, name, address, price, rating, freewifi, breakfast, pool, parking, bar, " +
-                "airconditioning, spa, fitness, restaurant_id from hotel where id = ?";
+        String SQL = "select id, name, address, price, rating, freeWifi, breakfast, pool, parking, bar, " +
+                "airConditioning, spa, fitness, restaurant from hotel where id = " + id;
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
                 ResultSet rs = stmt.executeQuery()
         ){
-            stmt.setInt(1, id);
-            while(rs.next()){
-                return new Hotel(rs.getInt("id"),
+            Hotel hotel;
+            if(rs.next()){
+                hotel = new Hotel(rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("address"),
                         rs.getDouble("price"),
                         rs.getInt("rating"),
-                        rs.getBoolean("freewifi"),
+                        rs.getBoolean("freeWifi"),
                         rs.getBoolean("breakfast"),
                         rs.getBoolean("pool"),
                         rs.getBoolean("parking"),
                         rs.getBoolean("bar"),
-                        rs.getBoolean("airconditioning"),
+                        rs.getBoolean("airConditioning"),
                         rs.getBoolean("spa"),
                         rs.getBoolean("fitness"),
-                        rs.getInt("restaurant_id"));
+                        rs.getInt("restaurantId")
+                        );
             }
-            System.out.println("Getting hotel by id = " + id);
+            else{
+                return null;
+            }
+            System.out.println("getting hotel by id = " + id);
+            return hotel;
         }
         catch(SQLException ex){
             System.out.println("getting hotel UNSUCCESSFUL!");
             System.out.println(ex.getMessage());
+            return null;
         }
-        return null;
     }
 
 
-    public static Hotel addHotel(Hotel hotel){
-        String SQL = "insert into hotel values(?,?,?,?,?, ?,?,?,?,?, ?,?,?,?)";
-        try(
-                Connection conn = db.connect();
-                PreparedStatement stmt = conn.prepareStatement(SQL)
-        ){
-            stmt.setInt(1,hotel.getId());
-            stmt.setString(2,hotel.getName());
-            stmt.setString(3,hotel.getAddress());
-            stmt.setDouble(4,hotel.getPrice());
-            stmt.setInt(5,hotel.getRating());
-            stmt.setBoolean(6,hotel.isFreeWifi());
-            stmt.setBoolean(7,hotel.isBreakfast());
-            stmt.setBoolean(8,hotel.isPool());
-            stmt.setBoolean(9,hotel.isParking());
-            stmt.setBoolean(10,hotel.isBar());
-            stmt.setBoolean(11,hotel.isAirConditioning());
-            stmt.setBoolean(12,hotel.isSpa());
-            stmt.setBoolean(13,hotel.isFitness());
-            stmt.setInt(14,hotel.getRestaurant());
-            stmt.executeUpdate();
-            System.out.println("Adding hotel");
-        }
-        catch(SQLException ex){
-            System.out.println("Adding hotel UNSUCCESSFUL");
-            System.out.println(ex.getMessage());
-        }
-        return null;
-    }
+
     public static Hotel updateHotel(Hotel hotel){
         String SQL = "update hotel set name = ? where id = ?";
         try(
@@ -146,5 +123,4 @@ public class HotelDao {
         }
         return hotelList;
     }
-
 }
