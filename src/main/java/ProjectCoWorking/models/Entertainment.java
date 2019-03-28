@@ -7,12 +7,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="entertainment")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Entertainment {
+
    private int id;
    private String name;
    private double price;
    private String address;
    private int ageRestrictions;
-
+    // make raiting
     public Entertainment() {
     }
 

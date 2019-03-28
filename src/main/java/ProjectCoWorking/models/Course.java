@@ -12,18 +12,18 @@ public class Course {
    private int rating;
    private String address;
    private double price;
-   private String time;
+//   private String time;
 
     public Course() {
     }
 
-    public Course(int id, String name, int rating, String address, double price, String time) {
+    public Course(int id, String name, int rating, String address, double price) {
         this.id = id;
         this.name = name;
         this.rating = rating;
         this.address = address;
         this.price = price;
-        this.time = time;
+//        this.time = time;
     }
 
     public int getId() {
@@ -46,9 +46,9 @@ public class Course {
         return price;
     }
 
-    public String getTime() {
-        return time;
-    }
+//    public String getTime() {
+//        return time;
+//    }
 
     @Override
     public String toString() {
@@ -58,7 +58,7 @@ public class Course {
                 ", rating=" + rating +
                 ", address='" + address + '\'' +
                 ", price=" + price +
-                ", time='" + time + '\'' +
+//                ", time='" + time + '\'' +
                 '}';
     }
 }

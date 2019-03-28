@@ -9,16 +9,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Feedback {
    private int id;
    private String message;
-   private String recallTime;
+//   private String recallTime;
    private int userId;
 
     public Feedback() {
     }
 
-    public Feedback(int id, String message, String recallTime, int userId) {
+    public Feedback(int id, String message,  int userId) {
         this.id = id;
         this.message = message;
-        this.recallTime = recallTime;
+//        this.recallTime = recallTime;
         this.userId = userId;
     }
 
@@ -30,9 +30,9 @@ public class Feedback {
         return message;
     }
 
-    public String getRecallTime() {
-        return recallTime;
-    }
+//    public String getRecallTime() {
+//        return recallTime;
+//    }
 
     public int getUserId() {
         return userId;
@@ -43,7 +43,7 @@ public class Feedback {
         return "Feedback{" +
                 "id=" + id +
                 ", message='" + message + '\'' +
-                ", recallTime='" + recallTime + '\'' +
+//                ", recallTime='" + recallTime + '\'' +
                 ", userId=" + userId +
                 '}';
     }

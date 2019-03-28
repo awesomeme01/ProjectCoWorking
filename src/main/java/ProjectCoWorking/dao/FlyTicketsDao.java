@@ -15,7 +15,7 @@ public class FlyTicketsDao {
     //id, price, categories, time
     static DatabaseConnector db = new DatabaseConnector();
     public static FlyTickets getFlyTickets(int id){
-        String SQL = "select id, price, categories, cast(time as varchar(50)) where id = " + id;
+        String SQL = "select id, price, categories, cast(time as varchar(50)) from flytickets where id = " + id;
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
@@ -42,7 +42,7 @@ public class FlyTicketsDao {
         }
     }
     public static FlyTickets addFlyTickets(FlyTickets flyTickets){
-        String SQL = "insert into flyTickets(id, price, categories, time) values(?,?,?,?)";
+        String SQL = "insert into flytickets(id, pri    ce, categories, time) values(?,?,?,?)";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL)) {
@@ -61,7 +61,7 @@ public class FlyTicketsDao {
         }
     }
     public static FlyTickets updateFlyTickets(FlyTickets flyTickets){
-        String SQL = "update flyTickets set price = ? where id = ?";
+        String SQL = "update flytickets set price = ? where id = ?";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL)
@@ -79,7 +79,7 @@ public class FlyTicketsDao {
         }
     }
     public static void deleteFlyTickets(int id){
-        String SQL = "delete from flyTickets where id = ?";
+        String SQL = "delete from flytickets where id = ?";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL)
@@ -96,7 +96,7 @@ public class FlyTicketsDao {
     }
     public static List<FlyTickets> getAllFlyTickets(){
         List<FlyTickets> flyTicketsList = new ArrayList<>();
-        String SQL = "select id, price, categories cast(time as varchar(50)) from flyTickets";
+        String SQL = "select id, price, categories, cast(time as varchar(50)) from flytickets";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
@@ -108,10 +108,10 @@ public class FlyTicketsDao {
                         rs.getString("categories"),
                         rs.getString("time")));
             }
-            System.out.println("getting all flyTickets");
+            System.out.println("getting all flytickets");
         }
         catch(SQLException ex){
-            System.out.println("getting all flyTickets UNSUCCESSFUL");
+            System.out.println("getting all flytickets UNSUCCESSFUL");
             System.out.println(ex.getMessage());
         }
         return flyTicketsList;

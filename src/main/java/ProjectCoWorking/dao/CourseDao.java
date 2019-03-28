@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDao {
+
     //id, name, rating, address, price, time
     static DatabaseConnector db = new DatabaseConnector();
     public static Course getCourse(int id){
@@ -27,8 +28,7 @@ public class CourseDao {
                         rs.getString("name"),
                         rs.getInt("rating"),
                         rs.getString("address"),
-                        rs.getDouble("price"),
-                        rs.getString("time"));
+                        rs.getDouble("price"));
             }
 
             else{
@@ -44,7 +44,7 @@ public class CourseDao {
         }
     }
     public static Course addCourse(Course course){
-        String SQL = "insert into course(id, name, rating, address, price, time) values(?,?,?,?,?,?)";
+        String SQL = "insert into course(id, name, rating, address, price) values(?,?,?,?,?)";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL)) {
@@ -53,7 +53,7 @@ public class CourseDao {
             stmt.setInt(3, course.getRating());
             stmt.setString(4, course.getAddress());
             stmt.setDouble(5, course.getPrice());
-            stmt.setString(6, course.getTime());
+//            stmt.setString(6, course.getTime());
             stmt.executeUpdate();
             System.out.println("adding course");
             return course;
@@ -100,7 +100,7 @@ public class CourseDao {
     }
     public static List<Course> getAllCourse(){
         List<Course> courseList = new ArrayList<>();
-        String SQL = "select id, name, rating, address, price, cast(time as varchar(50)) from course";
+        String SQL = "select id, name, rating, address, price from course";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
@@ -111,8 +111,7 @@ public class CourseDao {
                         rs.getString("name"),
                         rs.getInt("rating"),
                         rs.getString("address"),
-                        rs.getDouble("price"),
-                        rs.getString("time")));
+                        rs.getDouble("price")));
             }
             System.out.println("getting all courses");
         }

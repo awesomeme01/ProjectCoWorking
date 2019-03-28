@@ -15,7 +15,7 @@ public class FeedbackDao {
     //id, message, recallTime, userId
    static DatabaseConnector db = new DatabaseConnector();
     public static Feedback getFeedback(int id){
-        String SQL = "select id, message, recallTime, user_id from feedBack where id = " + id;
+        String SQL = "select id, message, user_id from feedback where id = " + id;
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
@@ -25,7 +25,7 @@ public class FeedbackDao {
             if(rs.next()){
                 feedback = new Feedback(rs.getInt("id"),
                         rs.getString("message"),
-                        rs.getString("recallTime"),
+//                        rs.getString("recallTime"),
                         rs.getInt("user_id"));
             }
 
@@ -42,13 +42,13 @@ public class FeedbackDao {
         }
     }
     public static Feedback addFeedback(Feedback feedback){
-        String SQL = "insert into feedBack(id, message, recallTime, user_id) values(?,?,?,?)";
+        String SQL = "insert into feedback(id, message, user_id) values(?,?,?)";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL)) {
             stmt.setInt(1, feedback.getId());
             stmt.setString(2, feedback.getMessage());
-            stmt.setString(3, feedback.getRecallTime());
+//            stmt.setString(3, feedback.getRecallTime());
             stmt.setInt(4, feedback.getUserId());
 
             stmt.executeUpdate();
@@ -97,7 +97,7 @@ public class FeedbackDao {
     }
     public static List<Feedback> getAllFeedback(){
         List<Feedback> feedbackList = new ArrayList<>();
-        String SQL = "select id, message, recallTime, user_id from feedback";
+        String SQL = "select id, message, user_id  from feedback";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
@@ -106,8 +106,8 @@ public class FeedbackDao {
             while(rs.next()){
                 feedbackList.add(new Feedback(rs.getInt("id"),
                         rs.getString("message"),
-                        rs.getString("recallTime"),
-                        rs.getInt("user-id")));
+//                        rs.getString("recallTime"),
+                        rs.getInt("user_id")));
             }
             System.out.println("getting all reviews");
         }

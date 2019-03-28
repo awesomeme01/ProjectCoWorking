@@ -16,7 +16,7 @@ public class HotelDao {
     static DatabaseConnector db = new DatabaseConnector();
     public static Hotel getHotel(int id){
         String SQL = "select id, name, address, price, rating, freeWifi, breakfast, pool, parking, bar, " +
-                "airConditioning, spa, fitness, restaurant from hotel where id = " + id;
+                "airConditioning, spa, fitness, restaurant_id from hotel where id = " + id;
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
@@ -37,7 +37,7 @@ public class HotelDao {
                         rs.getBoolean("airConditioning"),
                         rs.getBoolean("spa"),
                         rs.getBoolean("fitness"),
-                        rs.getInt("restaurantId")
+                        rs.getInt("restaurant_id")
                         );
             }
             else{
@@ -120,7 +120,7 @@ public class HotelDao {
     public static List<Hotel> getAllHotels(){
         List<Hotel> hotelList = new ArrayList<>();
         String SQL = "select id, name, address, price, rating, freeWifi, breakfast, pool, parking, bar, " +
-                "airConditioning, spa, fitness, restaurant from hotel;";
+                "airConditioning, spa, fitness, restaurant_id from hotel;";
         try(
                 Connection conn = db.connect();
                 PreparedStatement stmt = conn.prepareStatement(SQL);
@@ -140,7 +140,7 @@ public class HotelDao {
                         rs.getBoolean("airConditioning"),
                         rs.getBoolean("spa"),
                         rs.getBoolean("fitness"),
-                        rs.getInt("restaurantId")
+                        rs.getInt("restaurant_id")
                 ));
             }
             System.out.println("getting all hotels");

@@ -20,7 +20,7 @@ public class CourseService {
     // URI:
     // contextPath/servletPath/course/{courseId}
     @GET
-    @Path("/{coursed}")
+    @Path("/{courseId}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Course getCourse(@PathParam("courseId") Integer courseId){
         return CourseDao.getCourse(courseId);
@@ -45,7 +45,7 @@ public class CourseService {
     @DELETE
     @Path("/{courseId}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public void deleteCourse(@PathParam("CourseId") Integer courseId) {
+    public void deleteCourse(@PathParam("courseId") Integer courseId) {
         CourseDao.deleteCourse(courseId);
     }
 }
