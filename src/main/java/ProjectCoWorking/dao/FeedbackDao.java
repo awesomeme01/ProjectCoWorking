@@ -95,7 +95,7 @@ public class FeedbackDao {
         }
 
     }
-    public static List<Feedback> getAllFEedback(){
+    public static List<Feedback> getAllFeedback(){
         List<Feedback> feedbackList = new ArrayList<>();
         String SQL = "select id, message, recallTime, user_id from feedback";
         try(

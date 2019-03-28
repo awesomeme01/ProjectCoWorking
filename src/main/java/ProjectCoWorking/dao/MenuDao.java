@@ -91,7 +91,7 @@ public class MenuDao {
         }
 
     }
-    public static List<Menu> getAllMenu(Menu menu){
+    public static List<Menu> getAllMenu(){
         List<Menu> menuList = new ArrayList<>();
         String SQL = "select id, dishes, price from menu";
         try(

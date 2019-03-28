@@ -53,7 +53,35 @@ public class HotelDao {
         }
     }
 
-
+    public static Hotel addHotel(Hotel hotel){
+        String SQL = "insert into hotel values(?,?,?,?,?, ?,?,?,?,?, ?,?,?,?)";
+        try(
+                Connection conn = db.connect();
+                PreparedStatement stmt = conn.prepareStatement(SQL)
+        ){
+            stmt.setInt(1,hotel.getId());
+            stmt.setString(2,hotel.getName());
+            stmt.setString(3,hotel.getAddress());
+            stmt.setDouble(4,hotel.getPrice());
+            stmt.setInt(5,hotel.getRating());
+            stmt.setBoolean(6,hotel.isFreeWifi());
+            stmt.setBoolean(7,hotel.isBreakfast());
+            stmt.setBoolean(8,hotel.isPool());
+            stmt.setBoolean(9,hotel.isParking());
+            stmt.setBoolean(10,hotel.isBar());
+            stmt.setBoolean(11,hotel.isAirConditioning());
+            stmt.setBoolean(12,hotel.isSpa());
+            stmt.setBoolean(13,hotel.isFitness());
+            stmt.setInt(14,hotel.getRestaurant());
+            stmt.executeUpdate();
+            System.out.println("Adding hotel");
+        }
+        catch(SQLException ex){
+            System.out.println("Adding hotel UNSUCCESSFUL");
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
 
     public static Hotel updateHotel(Hotel hotel){
         String SQL = "update hotel set name = ? where id = ?";
