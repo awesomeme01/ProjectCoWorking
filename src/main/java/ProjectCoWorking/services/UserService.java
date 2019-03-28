@@ -8,7 +8,6 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/users")
-
 public class UserService {
     //--------- get users ----------
     @GET

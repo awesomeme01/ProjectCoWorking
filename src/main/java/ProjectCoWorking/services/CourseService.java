@@ -7,6 +7,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+@Path("/courses")
 public class CourseService {
     //--------- get course ----------
     @GET
